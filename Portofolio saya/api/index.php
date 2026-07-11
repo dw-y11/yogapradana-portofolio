@@ -1,0 +1,380 @@
+<?php
+/**
+ * Personal Portfolio Website - Main Entry Point
+ * Technology Stack: PHP, CSS, JS
+ */
+
+// ============================================================
+// DATA PORTOFOLIO - Sesuaikan dengan informasi diri Anda
+// ============================================================
+
+$profile = [
+    "name"      => "Yoga Pradana",
+    "photo"     => "Foto-Yoga.jpg.jpeg", // Nama file foto di assets/img/
+    "role"      => "Web Developer & Software Engineer",
+    "tagline"   => "Membangun solusi digital yang inovatif dan berdampak",
+    "bio"       => "Saya adalah seorang developer yang passionate dalam menciptakan aplikasi web modern dan user-friendly. Dengan pengalaman di berbagai teknologi, saya selalu berusaha memberikan solusi terbaik untuk setiap proyek yang saya kerjakan.",
+    "email"     => "dwyogapradana@gmail.com",
+    "phone"     => "+62 822-9352-4552",
+    "location"  => "Indonesia",
+    "github"    => "https://github.com/username",
+    "linkedin"  => "https://linkedin.com/in/dw-yoga-pradana-41a69627b/",
+    "instagram" => "https://instagram.com/dewayogaaa_",
+];
+
+$skills = [
+    ["name" => "Python", "level" => 90, "icon" => "🐍"],
+    ["name" => "HTML & CSS", "level" => 85, "icon" => "🎨"],
+    ["name" => "JavaScript", "level" => 80, "icon" => "⚡"],
+    ["name" => "Flask", "level" => 85, "icon" => "🌶️"],
+    ["name" => "Laravel / PHP", "level" => 75, "icon" => "🐘"],
+    ["name" => "Database (MySQL)", "level" => 80, "icon" => "🗄️"],
+    ["name" => "Git & GitHub", "level" => 85, "icon" => "🔀"],
+    ["name" => "UI/UX Design", "level" => 70, "icon" => "✏️"],
+];
+
+$projects = [
+    [
+        "title"       => "Virtual Tour Website",
+        "description" => "Website virtual tour interaktif untuk eksplorasi tempat wisata secara online dengan tampilan 360°.",
+        "tech"        => ["Laravel", "JavaScript", "Three.js"],
+        "link"        => "#",
+        "image"       => null,
+    ],
+    [
+        "title"       => "E-Commerce Platform",
+        "description" => "Platform e-commerce lengkap dengan fitur keranjang belanja, pembayaran, dan manajemen produk.",
+        "tech"        => ["Python", "Flask", "MySQL"],
+        "link"        => "#",
+        "image"       => null,
+    ],
+    [
+        "title"       => "Task Management App",
+        "description" => "Aplikasi manajemen tugas dengan fitur drag & drop, deadline reminder, dan kolaborasi tim.",
+        "tech"        => ["HTML", "CSS", "JavaScript"],
+        "link"        => "#",
+        "image"       => null,
+    ],
+    [
+        "title"       => "Portfolio Website",
+        "description" => "Website portofolio personal dengan desain modern, animasi smooth, dan responsivitas tinggi.",
+        "tech"        => ["PHP", "CSS", "JavaScript"],
+        "link"        => "#",
+        "image"       => null,
+    ],
+];
+
+$education = [
+    [
+        "degree"      => "Sarjana Komputer (S.Kom)",
+        "school"      => "ITB Stikom Bali",
+        "year"        => "2022 - 2026",
+        "description" => "Jurusan Teknologi Informasi. Aktif mempelajari software engineering dan pengembangan web.",
+    ],
+];
+
+$experience = [
+    [
+        "role"        => "Web Developer",
+        "company"     => "Perusahaan / Freelance",
+        "year"        => "2024 - Sekarang",
+        "description" => "Mengembangkan aplikasi web menggunakan berbagai framework modern.",
+    ],
+];
+
+// Helper to split names for styled layout
+$nameWords = explode(' ', $profile['name']);
+$firstName = isset($nameWords[0]) ? $nameWords[0] : '';
+$lastName  = count($nameWords) > 1 ? implode(' ', array_slice($nameWords, 1)) : '';
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portofolio <?php echo htmlspecialchars($profile['name']); ?> - <?php echo htmlspecialchars($profile['role']); ?>">
+    <title><?php echo htmlspecialchars($profile['name']); ?> | Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>Portfolio<span class="logo-bracket"> /&gt;</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#introduction" class="nav-link">Intro</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== SECTION 1: HERO ========== -->
+    <section class="panel hero-panel" id="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="hero-inner">
+            <p class="hero-label animate-on-scroll">PORTFOLIO</p>
+            <h1 class="hero-title animate-on-scroll">
+                <span class="hero-title-line"><?php echo htmlspecialchars($firstName); ?></span>
+                <?php if (!empty($lastName)): ?>
+                    <span class="hero-title-line hero-title-outline"><?php echo htmlspecialchars($lastName); ?></span>
+                <?php endif; ?>
+            </h1>
+            <p class="hero-subtitle animate-on-scroll"><span id="typed-text"></span></p>
+            <div class="hero-scroll-hint animate-on-scroll">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 2: INTRODUCTION (split layout) ========== -->
+    <section class="panel split-panel" id="introduction">
+        <div class="split-left">
+            <div class="split-img-wrapper animate-on-scroll">
+                <?php if ($profile['photo']): ?>
+                    <img src="/assets/img/<?php echo htmlspecialchars($profile['photo']); ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>" class="split-img">
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="split-content">
+                <span class="section-number animate-on-scroll">01</span>
+                <h2 class="section-heading animate-on-scroll">Introduction</h2>
+                <p class="section-text animate-on-scroll"><?php echo htmlspecialchars($profile['tagline']); ?></p>
+                <p class="section-text animate-on-scroll"><?php echo htmlspecialchars($profile['bio']); ?></p>
+                <div class="hero-social animate-on-scroll">
+                    <a href="<?php echo htmlspecialchars($profile['github']); ?>" target="_blank" class="social-link" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="<?php echo htmlspecialchars($profile['linkedin']); ?>" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="<?php echo htmlspecialchars($profile['instagram']); ?>" target="_blank" class="social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                </div>
+                <div class="cv-download animate-on-scroll">
+                    <a href="/assets/docs/CV_Yoga_Pradana.pdf" class="btn btn-primary" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download CV</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 3: ABOUT ME (split layout reversed) ========== -->
+    <section class="panel split-panel split-reverse" id="about">
+        <div class="split-left">
+            <div class="split-content">
+                <span class="section-number animate-on-scroll">02</span>
+                <h2 class="section-heading animate-on-scroll">About Me</h2>
+                <p class="section-text animate-on-scroll"><?php echo htmlspecialchars($profile['bio']); ?></p>
+                <div class="stats-row animate-on-scroll">
+                    <div class="stat-box">
+                        <span class="stat-num" data-count="1">0</span><span class="stat-plus">+</span>
+                        <span class="stat-lbl">Tahun<br>Pengalaman</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
+                        <span class="stat-lbl">Proyek<br>Selesai</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" data-count="5">0</span><span class="stat-plus">+</span>
+                        <span class="stat-lbl">Klien<br>Puas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="split-img-wrapper animate-on-scroll">
+                <?php if ($profile['photo']): ?>
+                    <img src="/assets/img/<?php echo htmlspecialchars($profile['photo']); ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>" class="split-img">
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 4: SKILLS ========== -->
+    <section class="panel full-panel" id="skills">
+        <div class="full-container">
+            <div class="full-header">
+                <span class="section-number animate-on-scroll">03</span>
+                <h2 class="section-heading animate-on-scroll">My Skills</h2>
+            </div>
+            <div class="skills-editorial-grid">
+                <?php foreach ($skills as $index => $skill): ?>
+                    <div class="skill-editorial-card animate-on-scroll">
+                        <span class="skill-num">0<?php echo $index + 1; ?></span>
+                        <div class="skill-editorial-info">
+                            <span class="skill-editorial-icon"><?php echo htmlspecialchars($skill['icon']); ?></span>
+                            <h3 class="skill-editorial-name"><?php echo htmlspecialchars($skill['name']); ?></h3>
+                            <div class="skill-editorial-bar">
+                                <div class="skill-editorial-progress" data-width="<?php echo htmlspecialchars($skill['level']); ?>"></div>
+                            </div>
+                            <span class="skill-editorial-pct"><?php echo htmlspecialchars($skill['level']); ?>%</span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 5: EXPERIENCE & EDUCATION (My Vision) ========== -->
+    <section class="panel split-panel" id="experience">
+        <div class="split-left">
+            <div class="split-content">
+                <span class="section-number animate-on-scroll">04</span>
+                <h2 class="section-heading animate-on-scroll">My Vision</h2>
+                <div class="vision-list">
+                    <?php foreach ($experience as $index => $exp): ?>
+                        <div class="vision-item animate-on-scroll">
+                            <span class="vision-num">0<?php echo $index + 1; ?>.</span>
+                            <div>
+                                <h4><?php echo htmlspecialchars($exp['role']); ?></h4>
+                                <p class="vision-sub"><?php echo htmlspecialchars($exp['company']); ?> &middot; <?php echo htmlspecialchars($exp['year']); ?></p>
+                                <p><?php echo htmlspecialchars($exp['description']); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                    <?php 
+                    $expCount = count($experience);
+                    foreach ($education as $index => $edu): 
+                    ?>
+                        <div class="vision-item animate-on-scroll">
+                            <span class="vision-num">0<?php echo $index + 1 + $expCount; ?>.</span>
+                            <div>
+                                <h4><?php echo htmlspecialchars($edu['degree']); ?></h4>
+                                <p class="vision-sub"><?php echo htmlspecialchars($edu['school']); ?> &middot; <?php echo htmlspecialchars($edu['year']); ?></p>
+                                <p><?php echo htmlspecialchars($edu['description']); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="split-img-wrapper split-img-dark animate-on-scroll">
+                <?php if ($profile['photo']): ?>
+                    <img src="/assets/img/<?php echo htmlspecialchars($profile['photo']); ?>" alt="<?php echo htmlspecialchars($profile['name']); ?>" class="split-img split-img-bw">
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 6: PROJECTS ========== -->
+    <section class="panel full-panel" id="projects">
+        <div class="full-container">
+            <div class="full-header">
+                <span class="section-number animate-on-scroll">05</span>
+                <h2 class="section-heading animate-on-scroll">My Projects</h2>
+            </div>
+            <div class="projects-editorial-grid">
+                <?php foreach ($projects as $project): ?>
+                    <a href="<?php echo htmlspecialchars($project['link']); ?>" class="project-editorial-card animate-on-scroll">
+                        <div class="project-editorial-thumb">
+                            <span class="project-editorial-initial"><?php echo htmlspecialchars(!empty($project['title']) ? $project['title'][0] : 'P'); ?></span>
+                        </div>
+                        <div class="project-editorial-info">
+                            <h3><?php echo htmlspecialchars($project['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($project['description']); ?></p>
+                            <div class="project-editorial-tags">
+                                <?php foreach ($project['tech'] as $tech): ?>
+                                    <span class="tag"><?php echo htmlspecialchars($tech); ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 7: CONTACT ========== -->
+    <section class="panel split-panel split-reverse" id="contact">
+        <div class="split-left">
+            <div class="split-content">
+                <span class="section-number animate-on-scroll">06</span>
+                <h2 class="section-heading animate-on-scroll">My Contact</h2>
+                <p class="section-text animate-on-scroll">
+                    Tertarik untuk berkolaborasi atau punya pertanyaan?
+                    Jangan ragu untuk menghubungi saya.
+                </p>
+                <div class="contact-list animate-on-scroll">
+                    <div class="contact-row">
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:<?php echo htmlspecialchars($profile['email']); ?>"><?php echo htmlspecialchars($profile['email']); ?></a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-label">Telepon</span>
+                        <a href="tel:<?php echo htmlspecialchars($profile['phone']); ?>"><?php echo htmlspecialchars($profile['phone']); ?></a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-label">Lokasi</span>
+                        <span><?php echo htmlspecialchars($profile['location']); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split-right">
+            <div class="form-wrapper animate-on-scroll">
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder=" " required>
+                        <label for="name">Nama Anda</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email Anda</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder=" " required>
+                        <label for="subject">Subjek</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                        <label for="message">Pesan</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Kirim Pesan</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION 8: THANK YOU / FOOTER ========== -->
+    <section class="panel thank-panel">
+        <div class="thank-inner animate-on-scroll">
+            <p class="thank-label">Thank You</p>
+            <h2 class="thank-title">Let's Work<br><span class="thank-outline">Together</span></h2>
+            <p class="thank-sub">Dibuat dengan ❤️ menggunakan PHP</p>
+            <p class="thank-copy">&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($profile['name']); ?>. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        window.TYPED_STRINGS = <?php echo json_encode([$profile['role'], "Creative Developer", "Problem Solver"]); ?>;
+    </script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
