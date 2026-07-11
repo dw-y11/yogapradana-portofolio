@@ -4,26 +4,18 @@
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/css/(.*)",
-      "dest": "/css/$1"
+      "source": "/send-message",
+      "destination": "/api/send-message.php"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/js/$1"
+      "source": "/((?!api|css|js|assets).*)",
+      "destination": "/api/index.php"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/send-message",
-      "dest": "/api/send-message.php"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.php"
+      "source": "/",
+      "destination": "/api/index.php"
     }
   ]
 }
